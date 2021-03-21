@@ -10,6 +10,7 @@ int ft_printf(const char *format, ...)
 	int i;
 	va_list args;
 	unsigned char c;
+	t_struct flags;
 	
 	i = 0;
 	va_start(args, format);
@@ -17,9 +18,10 @@ int ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			ft_printf_flags(&format[i], &args, &flags)
 			if (format[++i] == 'c')
 			{
-				ft_convert_percentage_c(&args); 
+				ft_convert_percentage_c(&args, &flags); 
 				i++;
 			}
 			if (format[++i] == '%')
@@ -41,11 +43,13 @@ int main ()
 	int ret;
 	int test = 60;
 	int ret2;
+	int width = 123456789;
+	int width2 = 50;
 
-	ret = printf("bonj%c%%our\n", test);
-	ret2 = ft_printf("bonj%c%%our\n", test);
+	ret = printf("%0000000000000030d\n",20);
+//	ret2 = ft_printf("bonj%**.*c\n", 5, 6, 7, 'v');
 	printf("%d\n", ret);
-	printf("%d\n", ret2);
+//	printf("%d\n", ret2);
 }
 
 
