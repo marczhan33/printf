@@ -25,7 +25,7 @@ int	ft_atoi(const char *str)
 #include <stdio.h>
 int main ()
 {
-	int a = ft_atoi("09-20");
+	int a = ft_atoi("5");
 	printf("%d", a);
 	return 0;
 
