@@ -1,14 +1,9 @@
 #include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
 int ft_printf(const char *format, ...)
 {
 	va_list args;
-	t_struct flags =  {0,0,0, 0, 0, 0, 0,0};// can not initialise this way
+	t_struct flags =  {0,0,0, 0, 0, 0, 0,0};// can not initialise this way, will have to declare a function 
 	
 	va_start(args, format);
 	while (format[flags.i] != '\0')
@@ -24,7 +19,7 @@ int ft_printf(const char *format, ...)
 			if (format[flags.i] == '%')
 			{
 				ft_convert_percentage_percentage(&flags);
-			flags.i++;
+				flags.i++;
 			}
 		}
 		flags.count = flags.count + write(1, &format[flags.i], 1);

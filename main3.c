@@ -2,7 +2,7 @@
 
 int main()
 {
-	int ret = printf("%10%\n");
+	int ret = printf("%20c", 'v');
 	printf("%d", ret);
 	return (0);
 }
