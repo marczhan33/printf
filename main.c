@@ -10,7 +10,8 @@ int ft_printf(const char *format, ...)
 	{
 		if (format[flags.i] == '%')
 		{
-			ft_printf_flags(&format[flags.i], &args, &flags);
+			flags.i++;
+			ft_printf_flags(format, &args, &flags);
 			if (format[flags.i] == 'c')
 			{
 				ft_convert_percentage_c(&args, &flags); 
@@ -19,6 +20,11 @@ int ft_printf(const char *format, ...)
 			if (format[flags.i] == '%')
 			{
 				ft_convert_percentage_percentage(&flags);
+				flags.i++;
+			}
+			if (format[flags.i] == 's')
+			{
+				ft_convert_percentage_s(&args, &flags);
 				flags.i++;
 			}
 		}
@@ -33,15 +39,12 @@ int ft_printf(const char *format, ...)
 int main ()
 {
 	int ret;
-//	int test = 60;
-//	int ret2;
-//	int width = 123456789;
-//	int width2 = 50;
+	int ret2;
 
-	ret = printf("%010%\n");
-//	ret2 = ft_printf("%-5c\n", 'v');
+
+	ret = printf("%.1s\n", "hey");
+	ret2 = ft_printf("%.1s\n", "hey");
 	printf("%d\n", ret);
-//	printf("%d\n", ret2);
+	printf("%d\n", ret2);
 }
-
 

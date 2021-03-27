@@ -1,0 +1,8 @@
+#include <stdio.h>
+int main()
+{
+	int ret;
+	char *str = "j";
+	ret = printf("%.20s", str);
+	printf("%d", ret);
+}
