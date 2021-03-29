@@ -27,6 +27,11 @@ int ft_printf(const char *format, ...)
 				ft_convert_percentage_s(&args, &flags);
 				flags.i++;
 			}
+			if (format[flags.i] == 'd')
+			{
+				ft_convert_percentage_d(&args, &flags);
+				flags.i++;
+			}
 		}
 		flags.count = flags.count + write(1, &format[flags.i], 1);
 		flags.i++;
@@ -36,15 +41,15 @@ int ft_printf(const char *format, ...)
 }
 
 // retourne le mauvais nombre
+#include <limits.h>
 int main ()
 {
 	int ret;
-	int ret2;
+//	int ret2;
 
-
-	ret = printf("%.1s\n", "hey");
-	ret2 = ft_printf("%.1s\n", "hey");
+	ret = printf("%u\n", 4294967294);
+//	ret2 = ft_printf("%-5.4d\n", -42);
 	printf("%d\n", ret);
-	printf("%d\n", ret2);
+//	printf("%d\n", ret2);
 }
 

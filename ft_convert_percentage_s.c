@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:47:31 by mzhan             #+#    #+#             */
-/*   Updated: 2021/03/27 18:08:47 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/03/29 17:05:49 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void ft_convert_percentage_s(va_list *arguments, t_struct *flags)
 	char space;
 	char zero;
 	char *str;
+	int i;
 
+	i = 0;
 	space = 32;
 	zero = '0';
 	str = va_arg(*arguments, char *);
@@ -32,17 +34,17 @@ void ft_convert_percentage_s(va_list *arguments, t_struct *flags)
 	{
 		if (flags->moins == 1)
 		{
-			flags->count = flags->count + ft_putstr_fd(str, 1);
+			flags->count = flags->count + ft_putstr_fd(str, 1, len);
 			flags->count = flags->count + ft_putchar_fd(space, 1, flags->nbofspaces);
 		}
 		else
 		{
 			if (flags->zero == 1)
-				flags->count = flags->count + ft_putchar_fd(zero, 1, flags->nbofzeros) + ft_putstr_fd(str, 1);
+				flags->count = flags->count + ft_putchar_fd(zero, 1, flags->nbofzeros) + ft_putstr_fd(str, 1, len);
 			else if (flags->zero == 0)
-				flags->count = flags->count + ft_putchar_fd(space, 1, flags->nbofspaces) + ft_putstr_fd(str, 1);
+				flags->count = flags->count + ft_putchar_fd(space, 1, flags->nbofspaces) + ft_putstr_fd(str, 1, len);
 		}
 	}
 	else
-		flags->count += ft_putstr_fd(str, 1);
+		flags->count += ft_putstr_fd(str, 1, len);
 }
