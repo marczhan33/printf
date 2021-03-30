@@ -6,7 +6,7 @@
 #    By: mzhan <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/24 16:07:03 by mzhan             #+#    #+#              #
-#    Updated: 2021/03/25 14:39:36 by mzhan            ###   ########.fr        #
+#    Updated: 2021/03/29 17:13:28 by mzhan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ CFLAGS			= -Wall -Werror -Wextra -c
 SRCS 			= ft_printf_flags.c \
 				  ft_convert_percentage_percentage.c \
 				  ft_convert_percentage_c.c \
-				  main.c \
+				  ft_printf.c \
+				  ft_convert_percentage_d.c \
+				  ft_convert_percentage_s.c \
 
 
 INCLUDE			= ft_printf.h

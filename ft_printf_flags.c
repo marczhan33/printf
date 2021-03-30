@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:09:52 by mzhan             #+#    #+#             */
-/*   Updated: 2021/03/29 12:17:46 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/03/30 15:49:12 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void ft_printf_flags(const char *format, va_list *arguments, t_struct *flags)
 
 	if (format[flags->i] == '.')
 	{
+		flags->point = 1;
 		flags->i++;
 		if (ft_strchr("0123456789", format[flags->i]))
 		{
