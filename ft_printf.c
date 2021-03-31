@@ -43,14 +43,14 @@ int ft_printf(const char *format, ...)
 	return (flags.count);
 }
 
-#include <limits.h>
+/*#include <limits.h>
 int main ()
 {
 	int ret;
 	int ret2;
 
-	ret = printf("%.6d\n", -3);
-	ret2 = ft_printf("%.6d\n", -3);
+	ret = printf("this %d number\n", 17);
+	ret2 = ft_printf("this%d number\n", 17);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
-}
+}*/
