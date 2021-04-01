@@ -17,17 +17,17 @@ int ft_printf(const char *format, ...)
 				ft_convert_percentage_c(&args, &flags); 
 				flags.i++;
 			}
-			if (format[flags.i] == '%')
+			else if (format[flags.i] == '%')
 			{
 				ft_convert_percentage_percentage(&flags);
 				flags.i++;
 			}
-			if (format[flags.i] == 's')
+			else if (format[flags.i] == 's')
 			{
 				ft_convert_percentage_s(&args, &flags);
 				flags.i++;
 			}
-			if (format[flags.i] == 'd')
+			else if (format[flags.i] == 'd')
 			{
 				ft_convert_percentage_d(&args, &flags);
 				flags.i++;
@@ -49,8 +49,8 @@ int main ()
 	int ret;
 	int ret2;
 
-	ret = printf("this %d number\n", 17);
-	ret2 = ft_printf("this%d number\n", 17);
+	ret = printf("hello, %s\n", "gavin");
+	ret2 = ft_printf("hello %s\n", "gavin");
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
 }*/
