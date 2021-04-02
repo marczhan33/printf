@@ -49,8 +49,8 @@ int main ()
 	int ret;
 	int ret2;
 
-	ret = printf("hello, %s\n", "gavin");
-	ret2 = ft_printf("hello %s\n", "gavin");
+	ret = printf("%.5s%7s\n", "yo", "boi");
+	ret2 = ft_printf("%.5s%7s\n", "yo", "oi");
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
 }*/
