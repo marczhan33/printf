@@ -27,9 +27,14 @@ int ft_printf(const char *format, ...)
 				ft_convert_percentage_s(&args, &flags);
 				flags.i++;
 			}
-			else if (format[flags.i] == 'd')
+			else if (format[flags.i] == 'd' || format[flags.i] == 'i')
 			{
 				ft_convert_percentage_d(&args, &flags);
+				flags.i++;
+			}
+			else if (format[flags.i] == 'u')
+			{
+				ft_convert_percentage_u(&args, &flags);
 				flags.i++;
 			}
 		}
@@ -43,14 +48,14 @@ int ft_printf(const char *format, ...)
 	return (flags.count);
 }
 
-/*#include <limits.h>
+#include <limits.h>
 int main ()
 {
 	int ret;
 	int ret2;
 
-	ret = printf("%.5s%7s\n", "yo", "boi");
-	ret2 = ft_printf("%.5s%7s\n", "yo", "oi");
+	ret = printf("%u\n", 4294967295u);
+	ret2 = ft_printf("%u\n", 4294967295u);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
-}*/
+}
