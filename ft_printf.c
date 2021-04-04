@@ -48,7 +48,7 @@ int ft_printf(const char *format, ...)
 	return (flags.count);
 }
 
-#include <limits.h>
+/*#include <limits.h>
 int main ()
 {
 	int ret;
@@ -58,4 +58,4 @@ int main ()
 	ret2 = ft_printf("%u\n", 4294967295u);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
-}
+}*/
