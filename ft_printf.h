@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:09:25 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/02 17:03:33 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/05 15:49:51 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_struct
 	int i;
 	int count;
 	int nbofzeros;
-	int nbofspaces;
+	int nbofspaces;	
 }				t_struct;
 
 void ft_convert_percentage_c(va_list * arguments, t_struct *flags);
@@ -40,5 +40,9 @@ void ft_convert_percentage_d(va_list *arguments, t_struct *flags);
 void ft_convert_percentage_u(va_list *arguments, t_struct *flags);
 int ft_nbrlen(int res);
 void ft_putunsign_fd(long unsigned int n, int fd);
+void ft_convert_percentage_x(va_list *arguments, t_struct *flags);
+void ft_putnbr_hexa(long unsigned int nbr, char *base);
+void ft_convert_percentage_X(va_list *arguments, t_struct *flags);
+void ft_convert_percentage_p(va_list *arguments, t_struct *flags);
 
 #endif 

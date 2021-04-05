@@ -37,6 +37,21 @@ int ft_printf(const char *format, ...)
 				ft_convert_percentage_u(&args, &flags);
 				flags.i++;
 			}
+			else if (format[flags.i] == 'x')
+			{
+				ft_convert_percentage_x(&args, &flags);
+				flags.i++;
+			}
+			else if (format[flags.i] == 'X')
+			{
+				ft_convert_percentage_X(&args, &flags);
+				flags.i++;
+			}
+			else if (format[flags.i] == 'p')
+			{
+				ft_convert_percentage_p(&args, &flags);
+				flags.i++;
+			}
 		}
 		else 
 		{
@@ -54,8 +69,8 @@ int main ()
 	int ret;
 	int ret2;
 
-	ret = printf("%u\n", 4294967295u);
-	ret2 = ft_printf("%u\n", 4294967295u);
+	ret = printf("%p\n", 0);
+	ret2 = ft_printf("%p\n", 0);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
 }*/
