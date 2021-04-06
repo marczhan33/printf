@@ -69,8 +69,8 @@ int main ()
 	int ret;
 	int ret2;
 
-	ret = printf("%p\n", 0);
-	ret2 = ft_printf("%p\n", 0);
+	ret = printf("%-i\n", -42);
+	ret2 = ft_printf("%-i\n", -42);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
 }*/

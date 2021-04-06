@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 10:09:52 by mzhan             #+#    #+#             */
-/*   Updated: 2021/03/30 15:49:12 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/06 11:54:50 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void get_width(const char *format, va_list *arguments, t_struct *flags)
 		flags->width = va_arg(*arguments, int);
 		flags->i++;
 	}
+	if (flags->width < 0)
+	{
+		flags->width = -flags->width;
+		flags->moins = 1;
+	}
 }
 
 void ft_printf_flags(const char *format, va_list *arguments, t_struct *flags)
@@ -58,6 +63,11 @@ void ft_printf_flags(const char *format, va_list *arguments, t_struct *flags)
 		{
 			flags->precision = va_arg(*arguments, int);
 			flags->i++;
+		}
+		if (flags->precision < 0)
+		{
+			flags->precision = 0;
+			flags->point = 0;
 		}
 	}
 }
