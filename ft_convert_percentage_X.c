@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 14:08:20 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/06 15:50:48 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/06 16:50:57 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,17 +267,7 @@ void ft_convert_percentage_X(va_list *arguments, t_struct *flags)
 			}*/
 			if (res >= 0)
 			{
-				if (flags->moins == 0)
-				{
-					if (flags->zero == 0)
-					{
-						flags->count += len;
-						ft_putnbr_hexa(res, "0123456789ABCDEF");
-					}
-					else if (flags->zero == 1)
-					{
-					}
-				}
+				ft_putnbr_hexa(res, "0123456789ABCDEF");
 			}
 		}
 	}
