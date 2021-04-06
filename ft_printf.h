@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:09:25 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/05 15:49:51 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/06 14:57:23 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@
 
 typedef struct s_struct
 {
-	_Bool zero;
-	_Bool moins;
-	int  width;
-	_Bool point;
+	int zero;
+	int moins;
+	int width;
+	int point;
 	int precision;
-	int i;
-	int count;
 	int nbofzeros;
 	int nbofspaces;	
+	int count;
+	int i;
 }				t_struct;
+
 
 void ft_convert_percentage_c(va_list * arguments, t_struct *flags);
 void ft_convert_percentage_percentage(t_struct *flags);

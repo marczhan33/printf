@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 16:12:08 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/05 13:54:38 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/06 15:41:57 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void ft_convert_percentage_u(va_list * arguments, t_struct *flags)
 	if (flags->point == 1 && res == 0 && flags->precision == 0)
 	{
 		if (flags->width != 0)
-			flags->count = ft_putchar_fd(space, 1, flags->width);
+			flags->count += ft_putchar_fd(space, 1, flags->width);
 	}
 	else if (flags->precision >= len)
 	{
@@ -143,14 +143,14 @@ void ft_convert_percentage_u(va_list * arguments, t_struct *flags)
 				{
 					if(flags->zero == 0)
 					{
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 						ft_putunsign_fd(res, 1);
 					}
 					else if (flags->zero == 1)
 					{
 						ft_putchar_fd(space, 1, flags->nbofzeros);
 						ft_putunsign_fd(res, 1);
-						flags->count = len + flags->nbofzeros;
+						flags->count += len + flags->nbofzeros;
 					}
 				}
 				else if (flags->moins == 1)
@@ -158,7 +158,7 @@ void ft_convert_percentage_u(va_list * arguments, t_struct *flags)
 					if (flags->zero == 0 || flags->zero == 1)
 					{
 						ft_putunsign_fd(res, 1);
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 					}
 				}
 			}*/
@@ -234,7 +234,7 @@ void ft_convert_percentage_u(va_list * arguments, t_struct *flags)
 				{
 					if(flags->zero == 0)
 					{
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 						ft_putunsign_fd(res, 1);
 					}
 					else if (flags->zero == 1)
@@ -242,7 +242,7 @@ void ft_convert_percentage_u(va_list * arguments, t_struct *flags)
 						ft_putchar_fd('-', 1, 1);
 						ft_putchar_fd(zero, 1, flags->nbofzeros);
 						ft_putunsign_fd((res * -1), 1);
-						flags->count = len + flags->nbofzeros;
+						flags->count += len + flags->nbofzeros;
 					}
 				}
 				else if (flags->moins == 1)
@@ -250,7 +250,7 @@ void ft_convert_percentage_u(va_list * arguments, t_struct *flags)
 					if (flags->zero == 0)
 					{
 						ft_putunsign_fd(res, 1);
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 					}
 				}
 			}*/

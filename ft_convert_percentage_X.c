@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 14:08:20 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/05 14:20:26 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/06 15:50:48 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void ft_convert_percentage_X(va_list *arguments, t_struct *flags)
 	if (flags->point == 1 && res == 0 && flags->precision == 0)
 	{
 		if (flags->width != 0)
-			flags->count = ft_putchar_fd(space, 1, flags->width);
+			flags->count += ft_putchar_fd(space, 1, flags->width);
 	}
 	else if (flags->precision >= len)
 	{
@@ -131,14 +131,14 @@ void ft_convert_percentage_X(va_list *arguments, t_struct *flags)
 				{
 					if(flags->zero == 0)
 					{
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 						ft_putnbr_hexa(res, "0123456789ABCDEF");
 					}
 					else if (flags->zero == 1)
 					{
 						ft_putchar_fd(space, 1, flags->nbofzeros);
 						ft_putnbr_hexa(res, "0123456789ABCDEF");
-						flags->count = len + flags->nbofzeros;
+						flags->count += len + flags->nbofzeros;
 					}
 				}
 				else if (flags->moins == 1)
@@ -146,7 +146,7 @@ void ft_convert_percentage_X(va_list *arguments, t_struct *flags)
 					if (flags->zero == 0 || flags->zero == 1)
 					{
 						ft_putnbr_hexa(res, "0123456789ABCDEF");
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 					}
 				}
 			}*/
@@ -222,7 +222,7 @@ void ft_convert_percentage_X(va_list *arguments, t_struct *flags)
 				{
 					if(flags->zero == 0)
 					{
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 						ft_putnbr_hexa(res, "0123456789ABCDEF");
 					}
 					else if (flags->zero == 1)
@@ -230,7 +230,7 @@ void ft_convert_percentage_X(va_list *arguments, t_struct *flags)
 						ft_putchar_fd('-', 1, 1);
 						ft_putchar_fd(zero, 1, flags->nbofzeros);
 						ft_putnbr_hexa((res * -1), "0123456789ABCDEF");
-						flags->count = len + flags->nbofzeros;
+						flags->count += len + flags->nbofzeros;
 					}
 				}
 				else if (flags->moins == 1)
@@ -238,7 +238,7 @@ void ft_convert_percentage_X(va_list *arguments, t_struct *flags)
 					if (flags->zero == 0)
 					{
 						ft_putnbr_hexa(res, "0123456789ABCDEF");
-						flags->count = ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
 					}
 				}
 			}*/

@@ -3,11 +3,13 @@
 int ft_printf(const char *format, ...)
 {
 	va_list args;
-	t_struct flags =  {0, 0,0,0, 0, 0, 0, 0,0};// can not initialise this way, will have to declare a function 
-	
+	t_struct flags;// =  {0, 0,0,0, 0, 0, 0, 0,0};// can not initialise this way, will have to declare a function 
+	flags.i = 0;
+	flags.count = 0;
 	va_start(args, format);
 	while (format[flags.i] != '\0')
 	{
+		ft_bzero(&flags, sizeof(flags) - sizeof(flags.i) - sizeof(flags.count));
 		if (format[flags.i] == '%')
 		{
 			flags.i++;
@@ -63,14 +65,15 @@ int ft_printf(const char *format, ...)
 	return (flags.count);
 }
 
-/*#include <limits.h>
-int main ()
+#include <limits.h>
+
+/*int main ()
 {
 	int ret;
 	int ret2;
 
-	ret = printf("%-i\n", -42);
-	ret2 = ft_printf("%-i\n", -42);
+	ret = printf(" --0*%0*.0x*0 0*%0*.10x*0-- ", -2, 0, 21, 1);
+	ret2 = ft_printf(" --0*%0*.0x*0 0*%0*.10x*0-- ", -2, 0, 21, 1);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
 }*/
