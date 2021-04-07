@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:47:31 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/07 12:18:55 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/07 17:01:35 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,16 @@ void ft_convert_percentage_s(va_list *arguments, t_struct *flags)
 			if (flags->point == 1 && flags->precision == 0)
 			{
 				if (flags->moins == 1)
-					flags->count += flags->count + ft_putchar_fd(space, 1, flags->width);
+					flags->count += ft_putchar_fd(space, 1, flags->width);
 				else if (flags->moins == 0)
-					flags->count += flags->count + ft_putchar_fd(space, 1, flags->width);
+					flags->count += ft_putchar_fd(space, 1, flags->width);
 			}
 			else if (flags->precision != 0 && flags->point == 1)
 			{
 				if (flags->moins == 1)
 				{
-					flags->count += flags->count + ft_putstr_fd(str, 1, len);
-					flags->count += flags->count + ft_putchar_fd(space, 1, flags->nbofspaces);
+					flags->count += ft_putstr_fd(str, 1, len);
+					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
 				}
 				else if (flags->moins == 0)
 				{
@@ -130,8 +130,8 @@ void ft_convert_percentage_s(va_list *arguments, t_struct *flags)
 			{
 				if (flags->moins == 1)
 				{
-					flags->count += flags->count + ft_putstr_fd(str, 1, len);
-					flags->count += flags->count + ft_putchar_fd(space, 1, flags->nbofspaces);
+					flags->count +=  ft_putstr_fd(str, 1, len);
+					flags->count +=  ft_putchar_fd(space, 1, flags->nbofspaces);
 				}
 				else if (flags->moins == 0)
 				{
@@ -151,8 +151,8 @@ void ft_convert_percentage_s(va_list *arguments, t_struct *flags)
 			{
 				if (flags->moins == 1)
 				{
-					flags->count += flags->count + ft_putstr_fd(str, 1, len);
-					flags->count += flags->count + ft_putchar_fd(space, 1, flags->nbofspaces);
+					flags->count += ft_putstr_fd(str, 1, len);
+					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
 				}
 				else if (flags->moins == 0)
 				{

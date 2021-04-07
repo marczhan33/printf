@@ -6,13 +6,13 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 12:03:57 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/07 11:46:51 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/07 17:01:31 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_nbrlen(int res)
+int ft_nbrlen(long int res)
 {
 	int count;
 
@@ -35,7 +35,7 @@ int ft_nbrlen(int res)
 
 void ft_convert_percentage_d(va_list * arguments, t_struct *flags)
 {
-	int res;
+	long int res;
 	char space;
 	char zero;
 	int len;
@@ -218,7 +218,7 @@ void ft_convert_percentage_d(va_list * arguments, t_struct *flags)
 					{
 						ft_putchar_fd('-', 1, 1);
 						ft_putchar_fd(zero, 1, flags->nbofzeros);
-						ft_putnbr_fd((res * -1), 1);
+						ft_putnbr_fd((-1 *res), 1);
 						flags->count += len + flags->nbofzeros;
 					}
 				}
