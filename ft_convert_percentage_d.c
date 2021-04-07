@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 12:03:57 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/06 17:05:21 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/07 11:46:51 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,30 +231,8 @@ void ft_convert_percentage_d(va_list * arguments, t_struct *flags)
 		}
 		else  if (flags->width == 0)
 		{
-			if (res < 0)
-			{
-				if (flags->moins == 0)
-				{
-					if (flags->zero == 0)
-					{
-						flags->count += len;
-						ft_putnbr_fd(res, 1);
-					}
-					else if (flags->zero == 1)
-					{
-					}
-				}
-				else if (flags->moins == 1)
-				{
-					flags->count += len;
-					ft_putnbr_fd(res, 1);
-				}
-			}
-			if (res >= 0)
-			{
-					flags->count += len;
-					ft_putnbr_fd(res, 1);
-			}
+			flags->count += len;
+			ft_putnbr_fd(res, 1);
 		}
 	}
 }

@@ -67,13 +67,13 @@ int ft_printf(const char *format, ...)
 
 #include <limits.h>
 
-int main ()
+/*int main ()
 {
 	int ret;
 	int ret2;
 
-	ret = printf("2%cd33fHFtk%-x\n", '9', -2147483647);
-	ret2 = ft_printf("2%cd33fHFtk%-x\n", '9', -2147483647);
+	ret = printf("YHJRn%0.*X9xOG2f0dd%.5s%-9xGCpfkao%*s\n", -8, -2147483647, NULL, 0, 3, "8lVlXqOG5Qrf0HpRjExMIt r6G5 3hBXijFNXTiVyqZ2j6PDtluofHv jRjarsHiLOql r6j7o4Nn");
+	ret2 = ft_printf("YHJRn%0.*X9xOG2f0dd%.5s%-9xGCpfkao%*s\n", -8, -2147483647, NULL, 0, 3, "8lVlXqOG5Qrf0HpRjExMIt r6G5 3hBXijFNXTiVyqZ2j6PDtluofHv jRjarsHiLOql r6j7o4Nn");
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 15:29:10 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/06 16:50:25 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/07 12:08:32 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void ft_convert_percentage_x(va_list * arguments, t_struct *flags)
 	}
 	space = 32;
 	zero = '0';
-	if (res == 0)
+	if (res == 0) 
 		len = 1;
 	if (flags->point == 1 && res == 0 && flags->precision == 0)
 	{
@@ -200,17 +200,8 @@ void ft_convert_percentage_x(va_list * arguments, t_struct *flags)
 			}*/
 			if (res >= 0)
 			{
-				if (flags->moins == 0)
-				{
-					if (flags->zero == 0)
-					{
-						flags->count += len;
-						ft_putnbr_hexa(res, "0123456789abcdef");
-					}
-					else if (flags->zero == 1)
-					{
-					}
-				}
+				flags->count += len;
+				ft_putnbr_hexa(res, "0123456789abcdef");
 			}
 		}
 	}
