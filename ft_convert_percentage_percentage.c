@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:36:10 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/08 17:54:43 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/08 18:04:31 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_width_non_zero(t_struct *f, char c)
 		}
 		else if (f->zero == 0)
 		{
-			f->count += ft_putchar_fd(space, 1, f->nbspaces);
+			f->count += ft_putchar_fd(f->space, 1, f->nbspaces);
 			f->count += write(1, &c, 1);
 		}
 	}

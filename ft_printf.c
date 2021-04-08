@@ -71,7 +71,7 @@ int	ft_printf(const char *format, ...)
 	return (f.count);
 }
 
-/*#include <limits.h>
+#include <limits.h>
 
 int main ()
 {
@@ -82,4 +82,4 @@ int main ()
 	ret2 = ft_printf("%-.2s\n", NULL);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
-}*/
+}
