@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 11:25:15 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/07 15:57:26 by mzhan            ###   ########.fr       */
+/*   Created: 2021/04/08 13:40:37 by mzhan             #+#    #+#             */
+/*   Updated: 2021/04/08 16:18:39 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void ft_putnbr_hexa_p(uintptr_t nbr, char *base)
 		write(1, &tab[--i], 1);
 }
 
-void ft_convert_percentage_p(va_list *arguments, t_struct *flags)
+void ft_convert_percentage_p(va_list *arguments, t_struct *f)
 {
 	void *str;
 	uintptr_t res;
@@ -61,135 +61,135 @@ void ft_convert_percentage_p(va_list *arguments, t_struct *flags)
 	zero = '0';
 	if (res == 0)
 		len = 1;
-	if (flags->point == 1 && res == 0 && flags->precision == 0) 
+	if (f->point == 1 && res == 0 && f->prec == 0) 
 	{
-		if (flags->width != 0) 
+		if (f->width != 0) 
 		{
-			flags->count += ft_putchar_fd(space, 1, flags->width - 2);
-			flags->count += ft_putchar_fd('0', 1, 1);
-			flags->count += ft_putchar_fd('x', 1, 1);
+			f->count += ft_putchar_fd(space, 1, f->width - 2);
+			f->count += ft_putchar_fd('0', 1, 1);
+			f->count += ft_putchar_fd('x', 1, 1);
 		}
-		else if (flags->width == 0)
+		else if (f->width == 0)
 		{
-			flags->count += ft_putchar_fd('0', 1, 1);
-			flags->count += ft_putchar_fd('x', 1, 1);
+			f->count += ft_putchar_fd('0', 1, 1);
+			f->count += ft_putchar_fd('x', 1, 1);
 		}
 	}
-	else if (flags->precision >= len)
+	else if (f->prec >= len)
 	{
-		if (flags->width != 0)
+		if (f->width != 0)
 		{
 			if (res >= 0)
 			{
-				flags->nbofspaces = (flags->width - flags->precision - 2 <= 0) ? 0 : flags->width - flags->precision - 2;
-				len2 = flags->precision - len;
-				if (flags->moins == 1)
+				f->nbspaces = (f->width - f->prec - 2 <= 0) ? 0 : f->width - f->prec - 2;
+				len2 = f->prec - len;
+				if (f->moins == 1)
 				{
-					flags->count += ft_putchar_fd('0', 1, 1);
-					flags->count += ft_putchar_fd('x', 1, 1);
+					f->count += ft_putchar_fd('0', 1, 1);
+					f->count += ft_putchar_fd('x', 1, 1);
 					ft_putchar_fd(zero, 1, len2);
 					ft_putnbr_hexa_p(res, "0123456789abcdef");
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + flags->precision - 2;
+					f->count += ft_putchar_fd(space, 1, f->nbspaces) + f->prec - 2;
 				}
-				else if (flags->moins == 0)
+				else if (f->moins == 0)
 				{
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + flags->precision;
-					flags->count +=	ft_putchar_fd('0', 1, 1);
-					flags->count +=	ft_putchar_fd('x', 1, 1);
+					f->count += ft_putchar_fd(space, 1, f->nbspaces) + f->prec;
+					f->count +=	ft_putchar_fd('0', 1, 1);
+					f->count +=	ft_putchar_fd('x', 1, 1);
 					ft_putchar_fd(zero, 1, len2);
 					ft_putnbr_hexa_p(res, "0123456789abcdef");
 				}
 			}
 		}
-		else if (flags->width == 0)
+		else if (f->width == 0)
 		{
 			{
-				len2 = flags->precision - len;
-				flags->count += ft_putchar_fd('0', 1, 1);
-				flags->count += ft_putchar_fd('x', 1, 1);
+				len2 = f->prec - len;
+				f->count += ft_putchar_fd('0', 1, 1);
+				f->count += ft_putchar_fd('x', 1, 1);
 				ft_putchar_fd(zero, 1, len2);
 				ft_putnbr_hexa_p(res, "0123456789abcdef");
-				flags->count += flags->precision;
+				f->count += f->prec;
 			}
 		}
 	}
-	else if (flags->precision < len && flags->point == 1)
+	else if (f->prec < len && f->point == 1)
 	{
-		flags->nbofzeros = (flags->width - len - 2<= 0) ? 0 : flags->width - len - 2;
-		flags->nbofspaces = (flags->width - len - 2<= 0) ? 0 : flags->width - len - 2;
-		if (flags->width != 0)
+		f->nbzeros = (f->width - len - 2<= 0) ? 0 : f->width - len - 2;
+		f->nbspaces = (f->width - len - 2<= 0) ? 0 : f->width - len - 2;
+		if (f->width != 0)
 		{
 			if (res >= 0)
 			{
-				if (flags->moins == 1)
+				if (f->moins == 1)
 				{
 					ft_putnbr_hexa_p(res, "0123456789abcdef");
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+					f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
 				}
-				else if (flags->moins == 0)
+				else if (f->moins == 0)
 				{
-					if (flags->zero == 1)
+					if (f->zero == 1)
 					{
-						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
-						flags->count += ft_putchar_fd('0', 1, 1);
-						flags->count += ft_putchar_fd('x', 1, 1);
+						f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
+						f->count += ft_putchar_fd('0', 1, 1);
+						f->count += ft_putchar_fd('x', 1, 1);
 						ft_putnbr_hexa_p(res, "0123456789abcdef");
 					}
-					else if (flags->zero == 0) 
+					else if (f->zero == 0) 
 					{
-						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
-						flags->count += ft_putchar_fd('0', 1, 1);
-						flags->count += ft_putchar_fd('x', 1, 1);
+						f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
+						f->count += ft_putchar_fd('0', 1, 1);
+						f->count += ft_putchar_fd('x', 1, 1);
 						ft_putnbr_hexa_p(res, "0123456789abcdef");
 					}
 				}
 			}
 		}
-		else  if (flags->width == 0)
+		else  if (f->width == 0)
 		{
-			flags->count += len;
+			f->count += len;
 			ft_putnbr_hexa_p(res, "0123456789abcdef");
 		}
 	}
-	else if (flags->precision < len && flags->point == 0)
+	else if (f->prec < len && f->point == 0)
 	{
-		flags->nbofzeros = (flags->width - len - 2 <= 0) ? 0 : flags->width - len - 2;
-		flags->nbofspaces = (flags->width - len - 2 <= 0) ? 0 : flags->width - len - 2;
-		if (flags->width != 0)
+		f->nbzeros = (f->width - len - 2 <= 0) ? 0 : f->width - len - 2;
+		f->nbspaces = (f->width - len - 2 <= 0) ? 0 : f->width - len - 2;
+		if (f->width != 0)
 		{
 			if (res >= 0)
 			{
-				if (flags->moins == 1)
+				if (f->moins == 1)
 				{
-					flags->count += ft_putchar_fd('0', 1, 1);
-					flags->count += ft_putchar_fd('x', 1, 1);
+					f->count += ft_putchar_fd('0', 1, 1);
+					f->count += ft_putchar_fd('x', 1, 1);
 					ft_putnbr_hexa_p(res, "0123456789abcdef");
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
+					f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
 				}
-				else if (flags->moins == 0)
+				else if (f->moins == 0)
 				{
-					if (flags->zero == 1)
+					if (f->zero == 1)
 					{
-						flags->count += ft_putchar_fd(zero, 1, flags->nbofzeros) + len;
+						f->count += ft_putchar_fd(zero, 1, f->nbzeros) + len;
 
-						flags->count += ft_putchar_fd('0', 1, 1);
-						flags->count += ft_putchar_fd('x', 1, 1);
+						f->count += ft_putchar_fd('0', 1, 1);
+						f->count += ft_putchar_fd('x', 1, 1);
 						ft_putnbr_hexa_p(res, "0123456789abcdef");
 					}
-					else if (flags->zero == 0)
+					else if (f->zero == 0)
 					{
-						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + len;
-						flags->count += ft_putchar_fd('0', 1, 1);
-						flags->count += ft_putchar_fd('x', 1, 1);
+						f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
+						f->count += ft_putchar_fd('0', 1, 1);
+						f->count += ft_putchar_fd('x', 1, 1);
 						ft_putnbr_hexa_p(res, "0123456789abcdef");
 					}
 				}
 			}
 		}
-		else  if (flags->width == 0)
+		else  if (f->width == 0)
 		{
-			flags->count += len + ft_putchar_fd('0', 1, 1);
-			flags->count += ft_putchar_fd('x',1 ,1) ;
+			f->count += len + ft_putchar_fd('0', 1, 1);
+			f->count += ft_putchar_fd('x',1 ,1) ;
 			ft_putnbr_hexa_p(res, "0123456789abcdef");
 		}
 	}

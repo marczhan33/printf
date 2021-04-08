@@ -6,18 +6,13 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:47:31 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/07 17:01:35 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/08 17:13:58 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//verifier str != NULL ?
-//verfier  width
-////verifier precision && // flags->point
-//verifier moins
-//verifier zero
-void ft_convert_percentage_s(va_list *arguments, t_struct *flags)
+void ft_convert_percentage_s(va_list *arguments, t_struct *f)
 {
 	int len;
 	char space;
@@ -31,139 +26,136 @@ void ft_convert_percentage_s(va_list *arguments, t_struct *flags)
 	{
 		str = "(null)";
 		len = 6;
-		if (flags->precision != 0 && flags->precision <= ft_strlen(str))
-			len = flags->precision;
+		if (f->point == 1 && f->prec == 0)
+		{
+			str = "";
+			len = 0;
+		}
+		else if (f->prec != 0 && f->prec <= ft_strlen(str))
+			len = f->prec;
 		else
 			len = ft_strlen(str);
-		flags->nbofzeros = (flags->width - len <= 0) ? 0 : flags->width - len;
-		flags->nbofspaces = (flags->width - len <= 0) ? 0 : flags->width - len;
-		if (flags->width == 0)
+		f->nbzeros = (f->width - len <= 0) ? 0 : f->width - len;
+		f->nbspaces = (f->width - len <= 0) ? 0 : f->width - len;
+		if (f->width == 0)
 		{ 
-			if (flags->point == 0)
+			if (f->point == 0)
 			{
-					flags->count += ft_putstr_fd(str, 1, len);
+					f->count += ft_putstr_fd(str, 1, len);
 			}
-			else if (flags->precision == 0 && flags->point == 1)
+			else if (f->prec == 0 && f->point == 1)
 			{
-				if (flags->moins == 0)
-						flags->count +=ft_putstr_fd(str, 1, len);
+				if (f->moins == 0)
+						f->count +=ft_putstr_fd(str, 1, len);
 			}
-			else if (flags->precision != 0)
-			{
-				if (flags->moins == 0)
-				{
-					if (flags->zero == 0)
-					{
-						flags->count += ft_putstr_fd(str, 1, len);
-					}
-				}
-			}
+			else if (f->prec != 0)
+				f->count += ft_putstr_fd(str, 1, len);
 		}
-		else if (flags->width != 0)
+		else if (f->width != 0)
 		{
-			if (flags->precision != 0)
+			if (f->prec != 0)
 			{
-				if (flags->moins == 0)
+				if (f->moins == 0)
 				{
-					if (flags->zero == 0)
+					if (f->zero == 0)
 					{
-						flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
-						flags->count += ft_putstr_fd(str, 1, len);
+						f->count += ft_putchar_fd(space, 1, f->nbspaces);
+						f->count += ft_putstr_fd(str, 1, len);
 					}
 				}
-				else if (flags->moins == 1)
+				else if (f->moins == 1)
 				{
-					flags->count += ft_putstr_fd(str, 1, len);
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
+					f->count += ft_putstr_fd(str, 1, len);
+					f->count += ft_putchar_fd(space, 1, f->nbspaces);
 				}
 			}
-			else if (flags->point == 0)
+			else if (f->point == 0)
 			{
-				if (flags->moins == 1)
+				if (f->moins == 1)
 				{
-					flags->count += ft_putstr_fd(str, 1, len);
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
+					f->count += ft_putstr_fd(str, 1, len);
+					f->count += ft_putchar_fd(space, 1, f->nbspaces);
 				}
-				else if (flags->moins == 0)
+				else if (f->moins == 0)
 				{
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
-					flags->count += ft_putstr_fd(str, 1, len);
+					f->count += ft_putchar_fd(space, 1, f->nbspaces);
+					f->count += ft_putstr_fd(str, 1, len);
 				}
 			}
-			else if (flags->precision == 0 && flags->point == 1)
-				flags->count += ft_putchar_fd(space, 1, flags->width);
+			else if (f->prec == 0 && f->point == 1)
+				f->count += ft_putchar_fd(space, 1, f->width);
 		}
 	}
 	else if (str != NULL)
 	{
-		if (flags->precision != 0 && flags->precision <= ft_strlen(str))
-			len = flags->precision;
+		if (f->prec != 0 && f->prec <= ft_strlen(str))
+			len = f->prec;
 		else
 			len = ft_strlen(str);
-		flags->nbofzeros = (flags->width - len <= 0) ? 0 : flags->width - len;
-		flags->nbofspaces = (flags->width - len <= 0) ? 0 : flags->width - len;
-		if (flags->width != 0)
+		f->nbzeros = (f->width - len <= 0) ? 0 : f->width - len;
+		f->nbspaces = (f->width - len <= 0) ? 0 : f->width - len;
+		if (f->width != 0)
 		{
-			if (flags->point == 1 && flags->precision == 0)
+			if (f->point == 1 && f->prec == 0)
 			{
-				if (flags->moins == 1)
-					flags->count += ft_putchar_fd(space, 1, flags->width);
-				else if (flags->moins == 0)
-					flags->count += ft_putchar_fd(space, 1, flags->width);
+				if (f->moins == 1)
+					f->count += ft_putchar_fd(space, 1, f->width);
+				else if (f->moins == 0)
+					f->count += ft_putchar_fd(space, 1, f->width);
 			}
-			else if (flags->precision != 0 && flags->point == 1)
+			else if (f->prec != 0 && f->point == 1)
 			{
-				if (flags->moins == 1)
+				if (f->moins == 1)
 				{
-					flags->count += ft_putstr_fd(str, 1, len);
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
+					f->count += ft_putstr_fd(str, 1, len);
+					f->count += ft_putchar_fd(space, 1, f->nbspaces);
 				}
-				else if (flags->moins == 0)
+				else if (f->moins == 0)
 				{
-					if (flags->zero == 1)
-						flags->count +=  ft_putchar_fd(zero, 1, flags->nbofzeros) + ft_putstr_fd(str, 1, len);
-					else if (flags->zero == 0)
-						flags->count +=  ft_putchar_fd(space, 1, flags->nbofspaces) + ft_putstr_fd(str, 1, len);
+					if (f->zero == 1)
+						f->count +=  ft_putchar_fd(zero, 1, f->nbzeros) + ft_putstr_fd(str, 1, len);
+					else if (f->zero == 0)
+						f->count +=  ft_putchar_fd(space, 1, f->nbspaces) + ft_putstr_fd(str, 1, len);
 				}
 			}
-			else if (flags->point == 0 && flags->precision == 0)
+			else if (f->point == 0 && f->prec == 0)
 			{
-				if (flags->moins == 1)
+				if (f->moins == 1)
 				{
-					flags->count +=  ft_putstr_fd(str, 1, len);
-					flags->count +=  ft_putchar_fd(space, 1, flags->nbofspaces);
+					f->count +=  ft_putstr_fd(str, 1, len);
+					f->count +=  ft_putchar_fd(space, 1, f->nbspaces);
 				}
-				else if (flags->moins == 0)
+				else if (f->moins == 0)
 				{
-					if (flags->zero == 1)
-						flags->count +=  ft_putchar_fd(zero, 1, flags->nbofzeros) + ft_putstr_fd(str, 1, len);
-					else if (flags->zero == 0)
-						flags->count +=  ft_putchar_fd(space, 1, flags->nbofspaces) + ft_putstr_fd(str, 1, len);
+					if (f->zero == 1)
+						f->count +=  ft_putchar_fd(zero, 1, f->nbzeros) + ft_putstr_fd(str, 1, len);
+					else if (f->zero == 0)
+						f->count +=  ft_putchar_fd(space, 1, f->nbspaces) + ft_putstr_fd(str, 1, len);
 				}
 			}
 		}
-		else if (flags->width == 0)
+		else if (f->width == 0)
 		{
-			if (flags->point == 1 && flags->precision == 0)
+			if (f->point == 1 && f->prec == 0)
 			{
 			}
-			else if (flags->point == 1 && flags->precision != 0)
+			else if (f->point == 1 && f->prec != 0)
 			{
-				if (flags->moins == 1)
+				if (f->moins == 1)
 				{
-					flags->count += ft_putstr_fd(str, 1, len);
-					flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
+					f->count += ft_putstr_fd(str, 1, len);
+					f->count += ft_putchar_fd(space, 1, f->nbspaces);
 				}
-				else if (flags->moins == 0)
+				else if (f->moins == 0)
 				{
-					if (flags->zero == 1)
-						flags->count += ft_putchar_fd(zero, 1, flags->nbofzeros) + ft_putstr_fd(str, 1, len);
-					else if (flags->zero == 0)
-						flags->count += ft_putstr_fd(str, 1, len);
+					if (f->zero == 1)
+						f->count += ft_putchar_fd(zero, 1, f->nbzeros) + ft_putstr_fd(str, 1, len);
+					else if (f->zero == 0)
+						f->count += ft_putstr_fd(str, 1, len);
 				}
 			}
 			else
-				flags->count += ft_putstr_fd(str, 1, len);
+				f->count += ft_putstr_fd(str, 1, len);
 		}
 	}
 }

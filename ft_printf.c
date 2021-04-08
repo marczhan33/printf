@@ -1,68 +1,74 @@
 #include "ft_printf.h"
 
-int ft_printf(const char *format, ...)
+void	ft_f_initialize(t_struct *f)
+{
+	f->i = 0;
+	f->count = 0;
+	f->chrzero = '0';
+	f->space = 32;
+}
+
+int	ft_printf(const char *format, ...)
 {
 	va_list args;
-	t_struct flags;// =  {0, 0,0,0, 0, 0, 0, 0,0};// can not initialise this way, will have to declare a function 
-	flags.i = 0;
-	flags.count = 0;
-	va_start(args, format);
-	while (format[flags.i] != '\0')
+	t_struct f;
+	ft_f_initialize(&f);	
+	while (format[f.i] != '\0')
 	{
-		ft_bzero(&flags, sizeof(flags) - sizeof(flags.i) - sizeof(flags.count));
-		if (format[flags.i] == '%')
+		ft_bzero(&f, sizeof(f) - sizeof(f.i) - sizeof(f.count));
+		if (format[f.i] == '%')
 		{
-			flags.i++;
-			ft_printf_flags(format, &args, &flags);
-			if (format[flags.i] == 'c')
+			f.i++;
+			ft_printf_f(format, &args, &f);
+			if (format[f.i] == 'c')
 			{
-				ft_convert_percentage_c(&args, &flags); 
-				flags.i++;
+				ft_convert_percentage_c(&args, &f); 
+				f.i++;
 			}
-			else if (format[flags.i] == '%')
+			else if (format[f.i] == '%')
 			{
-				ft_convert_percentage_percentage(&flags);
-				flags.i++;
+				ft_convert_percentage_percentage(&f);
+				f.i++;
 			}
-			else if (format[flags.i] == 's')
+			else if (format[f.i] == 's')
 			{
-				ft_convert_percentage_s(&args, &flags);
-				flags.i++;
+				ft_convert_percentage_s(&args, &f);
+				f.i++;
 			}
-			else if (format[flags.i] == 'd' || format[flags.i] == 'i')
+			else if (format[f.i] == 'd' || format[f.i] == 'i')
 			{
-				ft_convert_percentage_d(&args, &flags);
-				flags.i++;
+				ft_convert_percentage_d(&args, &f);
+				f.i++;
 			}
-			else if (format[flags.i] == 'u')
+			else if (format[f.i] == 'u')
 			{
-				ft_convert_percentage_u(&args, &flags);
-				flags.i++;
+				ft_convert_percentage_u(&args, &f);
+				f.i++;
 			}
-			else if (format[flags.i] == 'x')
+			else if (format[f.i] == 'x')
 			{
-				ft_convert_percentage_x(&args, &flags);
-				flags.i++;
+				ft_convert_percentage_x(&args, &f);
+				f.i++;
 			}
-			else if (format[flags.i] == 'X')
+			else if (format[f.i] == 'X')
 			{
-				ft_convert_percentage_X(&args, &flags);
-				flags.i++;
+				ft_convert_percentage_X(&args, &f);
+				f.i++;
 			}
-			else if (format[flags.i] == 'p')
+			else if (format[f.i] == 'p')
 			{
-				ft_convert_percentage_p(&args, &flags);
-				flags.i++;
+				ft_convert_percentage_p(&args, &f);
+				f.i++;
 			}
 		}
 		else 
 		{
-			flags.count = flags.count + write(1, &format[flags.i], 1);
-			flags.i++;
+			f.count = f.count + write(1, &format[f.i], 1);
+			f.i++;
 		}
 	}
 	va_end(args);
-	return (flags.count);
+	return (f.count);
 }
 
 /*#include <limits.h>
@@ -72,8 +78,8 @@ int main ()
 	int ret;
 	int ret2;
 
-	ret = printf("%-2.4s\n",NULL);
-	ret2 = ft_printf("%-2.4s\n",NULL);
+	ret = printf("%-.2s\n", NULL);
+	ret2 = ft_printf("%-.2s\n", NULL);
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
 }*/

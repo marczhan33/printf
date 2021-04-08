@@ -6,7 +6,7 @@
 #    By: mzhan <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/24 16:07:03 by mzhan             #+#    #+#              #
-#    Updated: 2021/04/05 14:58:18 by mzhan            ###   ########.fr        #
+#    Updated: 2021/04/08 15:44:54 by mzhan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,16 @@ OBJS	 		= ${SRCS:.c=.o}
 
 CFLAGS			= -Wall -Werror -Wextra -c
 
-SRCS 			= ft_printf_flags.c \
+SRCS 			= ft_printf_f.c \
 				  ft_convert_percentage_percentage.c \
 				  ft_convert_percentage_c.c \
 				  ft_printf.c \
 				  ft_convert_percentage_d.c \
+				  ft_nbrlen.c \
+				  ft_convert_percentage_d2.c \
 				  ft_convert_percentage_s.c \
 				  ft_convert_percentage_u.c \
-				  ft_putunsign_fd.c \
+				  ft_putunsign.c \
 				  ft_convert_percentage_x.c \
 				  ft_convert_percentage_X.c \
 				  ft_convert_percentage_p.c \

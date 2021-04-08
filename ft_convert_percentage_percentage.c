@@ -6,39 +6,43 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:36:10 by mzhan             #+#    #+#             */
-/*   Updated: 2021/03/27 16:39:37 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/08 17:54:43 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_convert_percentage_percentage(t_struct *flags)
+void	ft_width_non_zero(t_struct *f, char c)
 {
-	char c;
-	char space;
-	char zero;
-
-	space = 32;
-	c = '%';
-	zero = '0';
-	flags->nbofzeros = (flags->width - 1 <= 1) ? 0 : flags->width - 1;
- 	flags->nbofspaces = (flags->width -1 <= 1) ? 0 : flags->width - 1;
-
-	if (flags->width != 0)
+	if (f->moins == 1)
 	{
-		if (flags->moins == 1)
+		f->count += f->count + write(1, &c, 1);
+		f->count += ft_putchar_fd(f->space, 1, f->nbspaces);
+	}
+	else
+	{
+		if (f->zero == 1)
 		{
-			flags->count = flags->count + write(1, &c, 1);
-			flags->count += ft_putchar_fd(space, 1, flags->nbofspaces);
+			f->count += ft_putchar_fd(f->chrzero, 1, f->nbzeros);
+			f->count += write(1, &c, 1);
 		}
-		else 
+		else if (f->zero == 0)
 		{
-	  	 if (flags->zero == 1)
-		   flags->count += ft_putchar_fd(zero, 1, flags->nbofzeros) + write(1, &c, 1);
-	  	 else if (flags->zero == 0)
-		   flags->count += ft_putchar_fd(space, 1, flags->nbofspaces) + write(1, &c, 1);
+			f->count += ft_putchar_fd(space, 1, f->nbspaces);
+			f->count += write(1, &c, 1);
 		}
 	}
-	else 
-		flags->count += ft_putchar_fd(c, 1, 1);
+}
+
+void	ft_convert_percentage_percentage(t_struct *f)
+{
+	char c;
+
+	c = '%';
+	f->nbzeros = (f->width - 1 <= 1) ? 0 : f->width - 1;
+	f->nbspaces = (f->width - 1 <= 1) ? 0 : f->width - 1;
+	if (f->width != 0)
+		ft_width_non_zero(f, c);
+	else
+		f->count += ft_putchar_fd(c, 1, 1);
 }
