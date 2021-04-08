@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:09:25 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/08 17:35:13 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/08 18:12:18 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_struct
 {
 	char chrzero;
 	char space;
+	int len2;
 	int zero;
 	int moins;
 	int width;

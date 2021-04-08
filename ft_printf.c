@@ -2,6 +2,7 @@
 
 void	ft_f_initialize(t_struct *f)
 {
+	f->len2 = 0;
 	f->i = 0;
 	f->count = 0;
 	f->chrzero = '0';
