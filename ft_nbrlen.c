@@ -6,13 +6,13 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:45:56 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/08 16:14:09 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/09 17:08:50 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_nbrlen(long int res)
+int	ft_nbrlen(long int res)
 {
 	int count;
 
@@ -24,15 +24,15 @@ int ft_nbrlen(long int res)
 	}
 	if (res < 0)
 		count++;
-	while (res !=  0)
+	while (res != 0)
 	{
 		res = res / 10;
-		count ++;
+		count++;
 	}
 	return (count);
 }
 
-int ft_unsignedlen(unsigned int res)
+int	ft_unsignedlen(unsigned int res)
 {
 	int count;
 
@@ -44,10 +44,10 @@ int ft_unsignedlen(unsigned int res)
 	}
 	if (res < 0)
 		count++;
-	while (res !=  0)
+	while (res != 0)
 	{
 		res = res / 10;
-		count ++;
+		count++;
 	}
 	return (count);
 }

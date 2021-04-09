@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/09 17:09:24 by mzhan             #+#    #+#             */
+/*   Updated: 2021/04/09 17:59:13 by mzhan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_f_initialize(t_struct *f)
@@ -85,7 +97,7 @@ int		ft_printf(const char *format, ...)
 	return (f.count);
 }
 
-/*#include <limits.h>
+#include <limits.h>
 
 int main ()
 {
@@ -96,4 +108,4 @@ int main ()
 	ret2 = ft_printf("%c\n", 'v');
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
-}*/
+}

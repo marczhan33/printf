@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 13:40:37 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/09 15:18:07 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/09 15:21:26 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_widt_positive(t_struct *f, uintptr_t res)
 	}
 }
 
-void	ft_spec_case(t_struct *f, uintptr_t res)
+void	ft_spec_case(t_struct *f)
 {
 	if (f->width != 0)
 	{
@@ -81,7 +81,7 @@ void	ft_convert_percentage_p(va_list *arguments, t_struct *f)
 	res = va_arg(*arguments, uintptr_t);
 	ft_len(f, res);
 	if (f->point == 1 && res == 0 && f->prec == 0)
-		ft_spec_case(f, res);
+		ft_spec_case(f);
 	else if (f->prec >= f->len)
 	{
 		if (f->width != 0)

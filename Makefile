@@ -6,7 +6,7 @@
 #    By: mzhan <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/24 16:07:03 by mzhan             #+#    #+#              #
-#    Updated: 2021/04/09 11:09:26 by mzhan            ###   ########.fr        #
+#    Updated: 2021/04/09 16:09:16 by mzhan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS 			= ft_printf_f.c \
 				  ft_nbrlen.c \
 				  ft_convert_percentage_d2.c \
 				  ft_convert_percentage_s.c \
+				  ft_convert_percentage_s2c \
 				  ft_convert_percentage_u.c \
 				  ft_putunsign.c \
 				  ft_convert_percentage_x.c \
