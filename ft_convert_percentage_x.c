@@ -6,156 +6,114 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 15:29:10 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/08 16:17:03 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/09 11:43:36 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_putnbr_hexa(long unsigned int nbr, char *base)
+void	ft_point_un2(t_struct *f, long unsigned int res)
 {
-	int 			tab[100];
-	int 			i;
-	long int	 	longnb;
-
-	i = 0;
-	longnb = nbr;
-
-	if (longnb == 0)
-		write(1, &base[0], 1);
-	if (longnb < 0)
+	f->nbzeros = (f->width - f->len <= 0) ? 0 : f->width - f->len;
+	f->nbspaces = (f->width - f->len <= 0) ? 0 : f->width - f->len;
+	if (f->width != 0)
 	{
-		longnb = -longnb;
-		write (1, "-", 1);
+		if (f->moins == 1)
+		{
+			ft_putnbr_hexa(res, "0123456789abcdef");
+			f->count += ft_putchar_fd(f->space, 1, f->nbspaces) + f->len;
+		}
+		else if (f->moins == 0)
+		{
+			f->count += ft_putchar_fd(f->space, 1, f->nbspaces) + f->len;
+			ft_putnbr_hexa(res, "0123456789abcdef");
+		}
 	}
-	while (longnb !=  0)
+	else if (f->width == 0)
 	{
-		tab[i++] = base[(longnb % 16)];
-		longnb = longnb / 16;
+		f->count += f->len;
+		ft_putnbr_hexa(res, "0123456789abcdef");
 	}
-	while (i > 0)
-		write(1, &tab[--i], 1);
 }
 
-void ft_convert_percentage_x(va_list * arguments, t_struct *f)
+void	ft_width(t_struct *f, long unsigned int res)
+{
+	f->nbspaces = (f->width - f->prec <= 0) ? 0 : f->width - f->prec;
+	f->len2 = f->prec - f->len;
+	if (f->moins == 1)
+	{
+		ft_putchar_fd(f->chrzero, 1, f->len2);
+		ft_putnbr_hexa(res, "0123456789abcdef");
+		f->count += ft_putchar_fd(f->space, 1, f->nbspaces) + f->prec;
+	}
+	else if (f->moins == 0)
+	{
+		f->count += ft_putchar_fd(f->space, 1, f->nbspaces) + f->prec;
+		ft_putchar_fd(f->chrzero, 1, f->len2);
+		ft_putnbr_hexa(res, "0123456789abcdef");
+	}
+}
+
+void	ft_prec_sup_glob(t_struct *f, long unsigned int res)
+{
+	if (f->width != 0)
+		ft_width(f, res);
+	else if (f->width == 0)
+	{
+		f->len2 = f->prec - f->len;
+		ft_putchar_fd(f->chrzero, 1, f->len2);
+		ft_putnbr_hexa(res, "0123456789abcdef");
+		f->count += f->prec;
+	}
+}
+
+void	ft_point_zero_2(t_struct *f, long unsigned int res)
+{
+	f->nbzeros = (f->width - f->len <= 0) ? 0 : f->width - f->len;
+	f->nbspaces = (f->width - f->len <= 0) ? 0 : f->width - f->len;
+	if (f->width != 0)
+	{
+		if (f->moins == 1)
+		{
+			ft_putnbr_hexa(res, "0123456789abcdef");
+			f->count += ft_putchar_fd(f->space, 1, f->nbspaces) + f->len;
+		}
+		else if (f->moins == 0)
+		{
+			if (f->zero == 1)
+			{
+				f->count += ft_putchar_fd(f->chrzero, 1, f->nbzeros) + f->len;
+				ft_putnbr_hexa(res, "0123456789abcdef");
+			}
+			else if (f->zero == 0)
+			{
+				f->count += ft_putchar_fd(f->space, 1, f->nbspaces) + f->len;
+				ft_putnbr_hexa(res, "0123456789abcdef");
+			}
+		}
+	}
+}
+
+void	ft_convert_percentage_x(va_list *arguments, t_struct *f)
 {
 	long unsigned int res;
-	long unsigned int tmp;
-	char space;
-	char zero;
-	int len;
-	int len2;
 
-	len = 0;
 	res = va_arg(*arguments, unsigned int);
-	tmp = res;
-	while (tmp != 0)
-	{
-		tmp = tmp / 16;
-		len++;
-	}
-	space = 32;
-	zero = '0';
-	if (res == 0) 
-		len = 1;
+	ft_len_hexa(f, res);
 	if (f->point == 1 && res == 0 && f->prec == 0)
 	{
 		if (f->width != 0)
-			f->count += ft_putchar_fd(space, 1, f->width);
+			f->count += ft_putchar_fd(f->space, 1, f->width);
 	}
-	else if (f->prec >= len)
+	else if (f->prec >= f->len)
+		ft_prec_sup_glob(f, res);
+	else if (f->prec < f->len && f->point == 1)
+		ft_point_un2(f, res);
+	else if (f->prec < f->len && f->point == 0)
+		ft_point_zero_2(f, res);
+	else if (f->width == 0)
 	{
-		if (f->width != 0)
-		{
-			if (res >= 0)
-			{
-				f->nbspaces = (f->width - f->prec <= 0) ? 0 : f->width - f->prec;
-				len2 = f->prec - len;
-				if (f->moins == 1)
-				{
-					ft_putchar_fd(zero, 1, len2);
-					ft_putnbr_hexa(res, "0123456789abcdef");
-					f->count += ft_putchar_fd(space, 1, f->nbspaces) + f->prec;
-				}
-				else if (f->moins == 0)
-				{
-					f->count += ft_putchar_fd(space, 1, f->nbspaces) + f->prec;
-					ft_putchar_fd(zero, 1, len2);
-					ft_putnbr_hexa(res, "0123456789abcdef");
-				}
-			}
-		}
-		else if (f->width == 0)
-		{
-			len2 = f->prec - len;
-			ft_putchar_fd(zero, 1, len2);
-			ft_putnbr_hexa(res, "0123456789abcdef");
-			f->count += f->prec;
-		}
-	}
-	else if (f->prec < len && f->point == 1)
-	{
-		f->nbzeros = (f->width - len <= 0) ? 0 : f->width - len;
-		f->nbspaces = (f->width - len <= 0) ? 0 : f->width - len;
-		if (f->width != 0)
-		{
-			if (res >= 0)
-			{
-				if (f->moins == 1)
-				{
-					ft_putnbr_hexa(res, "0123456789abcdef");
-					f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
-				}
-				else if (f->moins == 0)
-				{
-					if (f->zero == 1)
-					{
-						f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
-						ft_putnbr_hexa(res, "0123456789abcdef");
-					}
-					else if (f->zero == 0)
-					{
-						f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
-						ft_putnbr_hexa(res, "0123456789abcdef");
-					}
-				}
-			}
-		}
-		else  if (f->width == 0)
-		{
-			f->count += len;
-			ft_putnbr_hexa(res, "0123456789abcdef");
-		}
-	}
-	else if (f->prec < len && f->point == 0)
-	{
-		f->nbzeros = (f->width - len <= 0) ? 0 : f->width - len;
-		f->nbspaces = (f->width - len <= 0) ? 0 : f->width - len;
-		if (f->width != 0)
-		{
-			if (f->moins == 1)
-			{
-				ft_putnbr_hexa(res, "0123456789abcdef");
-				f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
-			}
-			else if (f->moins == 0)
-			{
-				if (f->zero == 1)
-				{
-					f->count += ft_putchar_fd(zero, 1, f->nbzeros) + len;
-					ft_putnbr_hexa(res, "0123456789abcdef");
-				}
-				else if (f->zero == 0)
-				{
-					f->count += ft_putchar_fd(space, 1, f->nbspaces) + len;
-					ft_putnbr_hexa(res, "0123456789abcdef");
-				}
-			}
-		}
-		else  if (f->width == 0)
-		{
-			f->count += len;
-			ft_putnbr_hexa(res, "0123456789abcdef");
-		}
+		f->count += f->len;
+		ft_putnbr_hexa(res, "0123456789abcdef");
 	}
 }

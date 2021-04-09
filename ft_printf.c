@@ -2,22 +2,34 @@
 
 void	ft_f_initialize(t_struct *f)
 {
-	f->len = 0;
-	f->len2 = 0;
+	f->chrzero = '0';
+	f->space = ' ';
 	f->i = 0;
 	f->count = 0;
-	f->chrzero = '0';
-	f->space = 32;
 }
 
-int	ft_printf(const char *format, ...)
+void	ft_f_reset(t_struct *f)
+{
+	f->len = 0;
+	f->len2 = 0;
+	f->zero = 0;
+	f->moins = 0;
+	f->width = 0;
+	f->point = 0;
+	f->prec = 0;
+	f->nbzeros = 0;
+	f->nbspaces = 0;
+}
+
+int		ft_printf(const char *format, ...)
 {
 	va_list args;
 	t_struct f;
+	va_start(args, format);
 	ft_f_initialize(&f);	
 	while (format[f.i] != '\0')
 	{
-		ft_bzero(&f, sizeof(f) - sizeof(f.i) - sizeof(f.count));
+		ft_f_reset(&f);
 		if (format[f.i] == '%')
 		{
 			f.i++;
@@ -54,7 +66,7 @@ int	ft_printf(const char *format, ...)
 			}
 			else if (format[f.i] == 'X')
 			{
-				ft_convert_percentage_X(&args, &f);
+				ft_convert_percentage_bigx(&args, &f);
 				f.i++;
 			}
 			else if (format[f.i] == 'p')
@@ -73,15 +85,15 @@ int	ft_printf(const char *format, ...)
 	return (f.count);
 }
 
-#include <limits.h>
+/*#include <limits.h>
 
 int main ()
 {
 	int ret;
 	int ret2;
 
-	ret = printf("%-.2s\n", NULL);
-	ret2 = ft_printf("%-.2s\n", NULL);
+	ret = printf("%c\n", 'v');
+	ret2 = ft_printf("%c\n", 'v');
 	printf("%d\n", ret);
 	printf("%d\n", ret2);
-}
+}*/
