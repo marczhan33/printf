@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:48:32 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/09 16:25:56 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/10 15:27:03 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,6 @@ void	ft_width_null_s(t_struct *f, char *str)
 				f->count += ft_putstr_fd(str, 1, f->len);
 		}
 	}
+	else
+		f->count += ft_putstr_fd(str, 1, f->len);
 }

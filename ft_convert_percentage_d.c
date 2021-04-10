@@ -6,7 +6,7 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 12:03:57 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/09 14:01:04 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/10 12:17:52 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	ft_prec_sup_len_global(t_struct *f, int res, int len)
 
 void	ft_convert_percentage_d(va_list *arguments, t_struct *f)
 {
-	int			res;
-	int			len;
+	long int			res;
+	int					len;
 
 	res = va_arg(*arguments, int);
 	len = ft_nbrlen(res);

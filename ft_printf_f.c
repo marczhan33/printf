@@ -6,13 +6,13 @@
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 17:20:01 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/09 17:20:05 by mzhan            ###   ########.fr       */
+/*   Updated: 2021/04/10 12:05:36 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void get_f(const char *format, t_struct *f)
+void	get_f(const char *format, t_struct *f)
 {
 	while (format[f->i] == '0' || format[f->i] == '-')
 	{
@@ -24,7 +24,7 @@ void get_f(const char *format, t_struct *f)
 	}
 }
 
-void get_width(const char *format, va_list *arguments, t_struct *f)
+void	get_width(const char *format, va_list *arguments, t_struct *f)
 {
 	if (ft_strchr("0123456789", format[f->i]))
 	{
@@ -44,18 +44,17 @@ void get_width(const char *format, va_list *arguments, t_struct *f)
 	}
 }
 
-void ft_printf_f(const char *format, va_list *arguments, t_struct *f)
+void	ft_printf_f(const char *format, va_list *arguments, t_struct *f)
 {
-	get_f(format, f); 
+	get_f(format, f);
 	get_width(format, arguments, f);
-
 	if (format[f->i] == '.')
 	{
 		f->point = 1;
 		f->i++;
 		if (ft_strchr("0123456789", format[f->i]))
 		{
-			f->prec = ft_atoi(&format[f->i]);	
+			f->prec = ft_atoi(&format[f->i]);
 			while (ft_isdigit(format[f->i]))
 				f->i++;
 		}

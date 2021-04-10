@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_s.c                                     :+:      :+:    :+:   */
+/*   ft_convert_percentage_s.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzhan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/27 12:47:31 by mzhan             #+#    #+#             */
-/*   Updated: 2021/04/09 16:27:30 by mzhan            ###   ########.fr       */
+/*   Created: 2021/04/10 12:28:57 by mzhan             #+#    #+#             */
+/*   Updated: 2021/04/10 15:27:01 by mzhan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,5 @@ void	ft_convert_percentage_s(va_list *arguments, t_struct *f)
 			ft_width_positif(f, str);
 		else if (f->width == 0)
 			ft_width_null_s(f, str);
-		else
-			f->count += ft_putstr_fd(str, 1, f->len);
 	}
 }
